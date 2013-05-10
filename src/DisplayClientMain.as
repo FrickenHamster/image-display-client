@@ -20,6 +20,8 @@ public class DisplayClientMain extends  MovieClip
 	
 	private var imageList:Vector.<LoadedImage>;
 	
+	private var displayImage:LoadedImage;
+	
 	public function DisplayClientMain()
 	{
 		Security.loadPolicyFile("xmlsocket://" + HOST_ADDRESS + ":" + POLICY_PORT);
@@ -33,9 +35,20 @@ public class DisplayClientMain extends  MovieClip
 		
 	}
 	
-	public function addImage(link:String)
+	public function switchImage(image:LoadedImage):void
 	{
-		
+		if (contains(displayImage))
+		{
+			removeChild(displayImage);
+		}
+		displayImage = image;
+		addChild(displayImage);
+	}
+	
+	public function addImage(id:int, link:String):void
+	{
+		var image:LoadedImage = new LoadedImage(this, id, link);
+		imageList.push(image);
 	}
 }
 }
